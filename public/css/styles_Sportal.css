@@ -1,0 +1,26 @@
+
+.booking_form{
+    color : black;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+.outer_search{
+    margin-bottom: 40px;
+}
+.search_bar{
+    display: flex;
+    gap:20px;
+    justify-content: center;
+}
+input{
+    background-color: black;
+    color: white;
+}
+ .book{
+    background-color: white;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding : 50px;
+}

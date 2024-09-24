@@ -22,3 +22,8 @@ header{
     margin: 5%;
     padding: 25px 40px 25px 40px;
 }
+input{
+    border: 0px;
+    border-radius: 4%;
+    padding:5px
+}
