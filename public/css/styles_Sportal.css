@@ -23,4 +23,17 @@ input{
     margin-left: 25%;
     margin-right: 25%;
     padding : 50px;
+    border: none;
+    border-radius: 3%;
+}
+.form_buttons{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap:20%;
+}
+.form_buttons > input{
+    padding: 8px;
+    border: none;
+    border-radius: 10%;
 }
