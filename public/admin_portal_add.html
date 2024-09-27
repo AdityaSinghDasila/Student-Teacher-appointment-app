@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles_home.css">
+    <link rel="stylesheet" href="./css/styles_Sportal.css">
+</head>
+<body>
+    <!-- search Teacher -->
+    <header>
+        <h1>STUDENT TEACHER APPOINTMENT PORTAL</h1>
+        <p>Welcome Admin</p>
+     </header>
+     
+     
+     <div class="outer_search">
+        <div>
+             <form action="/" method="post" class ="search_bar">
+                <label for="Tname">Teacher Search :</label>
+                <input type="text" id="Tname" placeholder="Teacher Name" name="Teacher_name">
+                <input type="submit" value="search">
+            </form>
+        </div>
+     </div>
+
+     
+        <div class="book_outer">
+                <div class ="navigation_bar">
+                    <div class="buttn">
+                        <a href="./admin_portal_add.html">Add</a>
+                    </div>
+                    <div class="buttn">
+                        <a href="./admin_portal_remove.html">Remove</a>
+                    </div>
+                    <div class="buttn">
+                        <a href="./home_bst.html">Logout</a>
+                    </div>
+                </div>
+            <div class="book">
+                <form action="/" class="booking_form">
+                    <div>
+                        <label for="Sname">Name </label>
+                        <br>
+                        <input type="text" id="Teacher_name" name="Student_name" placeholder="name">
+                    </div>
+                    <div>
+                        <label for="Teacher_subject">Subject </label>
+                        <br>
+                        <input type="text" id="Teacher_subject" name="Teacher_subject" placeholder="subject">
+                    </div>
+                    <div>
+                        <label for="password">Password : </label>
+                        <br>
+                        <input type="text" id="password" name="Teacher_password" placeholder="password">
+                    </div>
+                    <div class="form_buttons">
+                        <input type="submit" >
+                        <input type="reset">
+                    </div>
+                </form>
+            </div>
+    
+    </div>
+</body>
+</html>
