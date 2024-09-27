@@ -20,11 +20,12 @@ input{
 }
  .book{
     background-color: white;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 5%;
+    margin-right: 5%;
     padding : 50px;
     border: none;
     border-radius: 3%;
+    max-width:600px
 }
 .form_buttons{
     margin-top: 30px;
@@ -36,4 +37,33 @@ input{
     padding: 8px;
     border: none;
     border-radius: 10%;
+}
+.book_outer{    
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap:50px
+    
+}
+
+.navigation_bar{
+    display: flex;
+    flex-direction: column;
+    gap:50px;
+    background-color: white;
+    padding:50px;
+    border: none;
+    border-radius: 3%;
+    align-items: center;
+    margin-right: 0px;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.buttn{
+    background-color: lightgrey;
+    padding:5px;
+    border:none;
+    border-radius: 5%;
 }
