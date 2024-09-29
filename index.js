@@ -24,8 +24,10 @@ const db = new pg.Client({
 db.connect();
 
 var userName ="";
-var Sid =0;
+var Sid =-1;
 
+var userNameT="";
+var Tid=-1;
 
 //app starts and sends login page "home_bst"
 app.get("/",(req,res)=>{
@@ -51,10 +53,30 @@ app.post("/login_student",async (req,res)=>{
     }    
 });
     //teacher login handler
-app.post("/login_teacher",(req,res)=>{
-    console.log("Form data found! " + req.body.teacher_id);
-    //after authentication
-    res.sendFile(__dirname + "/public/teacher_portal_approved.html");
+app.post("/login_teacher",async (req,res)=>{
+    try{
+        var query = "select * from teacher WHERE id = $1 AND password= $2";
+        var row = await db.query(query,[req.body.teacher_id,req.body.password]);
+        //after authentication
+        if(row.rows.length != 0){
+            var queApp ="SELECT * FROM appointments WHERE teacher_id=$1 AND status='approved'";
+            var Result = await db.query(queApp,[req.body.teacher_id]);
+            if(Result){
+                if(Result.rows.length!=0){
+                    res.render("teacher_portal_approved.ejs",{name : row.rows[0].name,datas:Result.rows});
+                    console.log("sign in successfull,"+ row.rows[0].name);
+                }else{
+                    res.render("teacher_portal_approved.ejs",{name : row.rows[0].name});
+                }
+            }else{
+                console.log("something went off!");
+            }
+            userNameT=row.rows[0].name;
+            Tid=row.rows[0].id;
+        }
+    }catch(error){
+        console.log(error.message);
+    }
 });
     //admin login handler
 app.post("/login_admin",(req,res)=>{
@@ -141,6 +163,141 @@ app.get("/get_student_status",async (req,res)=>{
     }    
 });
 
+app.get("/back_toBook",(req,res)=>{
+    try{
+        res.render("student_portal_book.ejs",{name: userName,});
+    }catch(error){
+        console.log(error.message);
+    }
+});
+
+app.get("/logoutS",(req,res)=>{
+    Sid=-1;
+    userName="";
+    res.render("home_bst.ejs",{});
+});
+
+
+
+
+
+
+
+/*------------------------------------------------------------------------------*/
+//TEACHER portal 
+app.get("/back_toAppointments",async (req,res)=>{
+    try{
+        var queApp ="SELECT * FROM appointments WHERE teacher_id=$1 AND status='approved'";
+        var Result = await db.query(queApp,[Tid]);
+        if(Result){
+            if(Result.rows.length!=0){
+                res.render("teacher_portal_approved.ejs",{name:userNameT,datas:Result.rows});
+                console.log("sign in successfull,"+ row.rows[0].name);
+            }else{
+                res.render("teacher_portal_approved.ejs",{name:userNameT});
+            }
+        }else{
+            console.log("something went off!");
+        }
+    }catch(error){
+        console.log(error.message);
+    }
+});
+     
+
+app.get("/logoutT",(req,res)=>{
+    userNameT="";
+    Tid=-1;
+    res.render("home_bst.ejs",{});
+});//with this, login functionality has been finished
+
+
+
+app.get("/Tpending",async (req,res)=>{
+    try{
+        var que="SELECT * FROM appointments WHERE teacher_id=$1 AND status='pending'";
+        console.log(Tid);
+        var result = await db.query(que,[Tid]);
+        if(result){
+            if(result.rows.length!=0){
+                res.render("teacher_portal_pending.ejs",{name:userNameT,datas:result.rows});
+            }else{
+                res.render("teacher_portal_pending.ejs",{name:userNameT});
+                console.log("no pending");
+            }
+        }
+        
+    }catch(error){
+        console.log(error.message);
+    }
+});
+
+app.post("/approve",async (req,res)=>{
+    try{
+        var que = "UPDATE appointments SET status='approved' WHERE a_id =$1;";
+        var result = await db.query(que,[req.body.appointment_id]);
+        if(result){
+            var nque = "SELECT * FROM appointments WHERE teacher_id=$1 AND status='pending'";
+            var newResult = await db.query(nque,[Tid]);
+            if(newResult){
+                if(newResult.rows.length!=0){
+                    res.render("teacher_portal_pending.ejs",{datas:newResult.rows});
+                    console.log("approved");
+                }else{
+                    res.render("teacher_portal_pending.ejs",{});
+                    console.log("nah");
+                }
+            }else{
+                res.send("<p>error</p>")
+                console.log("smthng wong!")
+            }
+        }else{
+            console.log("Something went wrong");
+        }
+    }catch(error){
+        console.log(error.message);
+    }
+});
+
+app.post("/cancel",async (req,res)=>{
+    try{
+        var que = "UPDATE appointments SET status='cancelled' WHERE a_id =$1;";
+        var result = await db.query(que,[req.body.appointment_id]);
+        if(result){
+            var nque = "SELECT * FROM appointments WHERE teacher_id=$1 AND status='pending'";
+            var newResult = await db.query(nque,[Tid]);
+            if(newResult){
+                if(newResult.rows.length){
+                    res.render("teacher_portal_pending.ejs",{datas:newResult.rows});
+                    console.log("cancelled");
+                }else{
+                    res.render("teacher_portal_pending.ejs",{});
+                    console.log("cancelled");
+                }
+            }else{
+                res.send("<p>error</p>")
+                console.log("smthng wong!")
+            }
+        }else{
+            console.log("Something went wrong");
+        }
+    }catch(error){
+        console.log(error.message);
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------------------------*/
+//ADMIN portal 
 
 
 

@@ -13,23 +13,27 @@
     <header>
         <h1>STUDENT TEACHER APPOINTMENT PORTAL</h1>
         <p>All of your approved requests till date</p>
+        <%if(locals.name){%>
+            <h4>welcome,<%=name%></h4>
+        <%}%>
      </header>
 
      
     <div class="book_outer">
                 <div class ="navigation_bar">
                     <div class="buttn">
-                        <a href="./teacher_portal_approved.html">Appointments</a>
+                        <a href="/back_toAppointments">Appointments</a>
                     </div>
                     <div class="buttn">
-                        <a href="./teacher_portal_pending.html">Pending</a>
+                        <a href="/Tpending">Pending</a>
                     </div>
                     <div class="buttn">
-                        <a href="./home_bst.html">Logout</a>
+                        <a href="/logoutT">Logout</a>
                     </div>
                 </div>
             
             <div class="approved_appo book " style="color:black">
+                <%if(locals.datas){%>
                 <table>
                     <tr>
                         <th>appointment id</th>
@@ -38,19 +42,21 @@
                         <th>Time</th>
                         <th>Reason</th>
                     </tr>
+                    <%for(var i=0;i<datas.length;i++){%>
                     <tr>
-                        <td>101</td>
-                        <td>909</td>
-                        <td>2022/06/12</td>
-                        <td>1300</td>
-                        <td>whatever</td>
+                        <td><%=datas[i].a_id%></td>
+                        <td><%=datas[i].student_id%></td>
+                        <td><%=datas[i].a_date%></td>
+                        <td><%=datas[i].a_time%></td>
+                        <td><%=datas[i].reason%></td>
                     </tr>
-                    <!--soo on below
-                    ....
-                    ..
-                    
-                    -->
+                <%}%>
                 </table>
+                <%}else{%>
+                    <div>
+                        <h4 style="color:red">No appointments scheduled yet</h4>
+                    </div>
+                <%}%>
             </div>
 
     </div>

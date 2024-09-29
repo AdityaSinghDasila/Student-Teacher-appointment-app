@@ -1,0 +1,6 @@
+a_id,student_id,teacher_id,date,time,reason,status
+1,1,1,2024-10-01,09:00:00,Guidance on Project,pending
+2,2,2,2024-10-02,10:00:00,Exam preparation,pending
+3,3,3,2024-10-03,11:30:00,Subject clarification,pending
+4,4,4,2024-10-04,12:00:00,Career advice,pending
+5,5,5,2024-10-05,14:00:00,Doubt in subject,pending
