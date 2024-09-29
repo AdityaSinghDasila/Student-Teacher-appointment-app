@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles_home.css">
+    <link rel="stylesheet" href="./css/styles_Sportal.css">
+</head>
+<body>
+    <!-- search Teacher -->
+    <header>
+        <h1>STUDENT TEACHER APPOINTMENT PORTAL</h1>
+        <% if(locals.name){%>
+            <h2>Welcome, <%=name%></h2>
+        <%}%>
+        <p>Search Teachers by name and fill the form to request an appointment.</p>
+     </header>
+     
+     
+    <div class="outer_search">
+        <div class ="reee">
+             <form action="/search_teacher" method="post" class ="search_bar">
+                <label for="Tname">Teacher Search :</label>
+                <input type="text" id="Tname" placeholder="Teacher Name" name="Teacher_name">
+                <input type="submit" value="search">
+            </form>
+            <%if(locals.message){%>
+                <p>no teachers found</p>
+            <%}else if(locals.datas){%>
+                    <table>
+                        <tr>
+                           <th>ID</th> 
+                           <th>name</th> 
+                           <th>subject</th> 
+                        </tr>
+                        <%for(var i=0;i<datas.length;i++){%>
+                        <tr>
+                            <td><%=datas[i].id%></td>
+                            <td><%=datas[i].name%></td>
+                            <td><%=datas[i].subject%></td>
+                        </tr>
+                        <%}%>
+                    </table>
+                <%}%>
+        </div>
+    </div>
+
+        <div class="book_outer">
+                <div class ="navigation_bar">
+                    <div class="buttn">
+                        <a href="./student_portal_book.html">Book</a>
+                    </div>
+                    <div class="buttn">
+                        <a href="/get_student_status">Status</a>
+                    </div>
+                    <div class="buttn">
+                        <a href="./home_bst.html">Logout</a>
+                    </div>
+                </div>
+            <div class="book">
+                <form action="/book_appointment" method="post" class="booking_form">
+                    <div>
+                        <label for="Tid">Teacher id  </label>
+                        <br>
+                        <input type="number" id="Tid" placeholder="id" name ="Teacher_id" required>
+                    </div>
+                    <div>
+                        <label for="Tname">Teacher Name</label>
+                        <br>
+                        <input type="text" id="Tname" placeholder="name" name="Teacher_name" required>
+                    </div>
+                    <div>
+                        <label for="Sname">Your Name </label>
+                        <br>
+                        <input type="text" id="Sname" name="Student_name" placeholder="name">
+                    </div>
+                    <div>
+                        <label for="Student_id">Your id</label>
+                        <br>
+                        <input type="number" id="Student_id" name="Student_id" placeholder="id">
+                    </div>
+                    <div>
+                        <label for="Date">Date</label>
+                        <br>
+                        <input type="date" id="Date" name="appointment_date" required style="background-color: grey;">
+                    </div>
+                    <div>
+                        <label for="Time">Time</label>
+                        <br>
+                        <input type="time" id="Time" name="appointment_time" required style="background-color: grey;">
+                    </div>
+                    <div>
+                        <label for="reason">Reason : </label>
+                        <br>
+                        <textarea id="reason" name="reason" rows="4" cols="50" placeholder="Enter the reason for the appointment..." style="background-color: black; color: white;"></textarea>
+                    </div>
+                    <div class="form_buttons">
+                        <input type="submit" >
+                        <input type="reset">
+                    </div>
+                </form>
+            </div>    
+    </div>
+</body>
+</html>

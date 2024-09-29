@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/styles_home.css">
+</head>
+<body>
+    <!-- Make login form for student Teacher and admin -->
+     <header>
+        <h1>STUDENT TEACHER APPOINTMENT PORTAL</h1>
+        <p>Our platform makes it easy for students to book appointments with their teachers online. Whether you need academic guidance, one-on-one meetings, or any consultation, you can schedule your time with just a few clicks. Teachers can manage their appointments effortlessly, approve or cancel bookings, and stay organized with a personalized dashboard. Admins can ensure smooth operations by managing teacher and student registrations. Enjoy a hassle-free and efficient booking experience! </p>
+        <p>Please Enter Your Credentials To Enter The Portal</p>
+     </header>
+     <div class="page">
+
+        <div class="student_outer all_three_outer">
+            <div id="student_box">
+                <p>Student</p>
+                <form action="/login_student" method="post">
+                    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                
+                    <div class="form-floating">
+                      <input type="Text" class="form-control" id="floatingInput" placeholder="stduentId" name="student_id">
+                      <label for="floatingInput">Student ID</label>
+                    </div>
+                    <div class="form-floating">
+                      <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                      name="password">
+                      <label for="floatingPassword">Password</label>
+                    </div>
+                
+                    <br>
+                    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+                  </form>
+            </div>
+        </div>
+
+        
+        <div class="Teacher_outer all_three_outer">
+            <div id="Teacher_box">
+                <p>Teacher</p>
+                <form action="/login_teacher" method="post">
+                    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="Teacher id" name="teacher_id">
+                      <label for="floatingInput">Teacher ID</label>
+                    </div>
+                    <div class="form-floating">
+                      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                      <label for="floatingPassword">Password</label>
+                    </div>
+                
+                    <br>
+                    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+                  </form>
+            </div>
+        </div>
+
+        <div class="student_outer all_three_outer">
+            <div id="student_box">
+                <p>Admin</p>
+                <form action="/login_admin" method="post">
+                    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                
+                    <div class="form-floating">
+                      <input type="Text" class="form-control" id="floatingInput" placeholder="adminId" name="admin_id">
+                      <label for="floatingInput">Admin ID</label>
+                    </div>
+                    <div class="form-floating">
+                      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                      <label for="floatingPassword">Password</label>
+                    </div>
+                    <br>
+                    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+                  </form>
+            </div>
+        </div>
+     </div>
+     <div>
+      <% if(locals.message){%>
+        <h3 style="color: red;"><%=message%></h3>
+      <%}%>
+     </div>
+     
+</body>
+</html>

@@ -35,5 +35,22 @@ h1{
 
 
 table,th,td{
-    border : 1px solid black
+    border : 1px solid black;
+}
+
+.reee{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    gap:10px;
+}
+
+table{
+    text-align: center;
+}
+th{
+    padding : 5px;
+}
+td{
+    padding:8px;
 }

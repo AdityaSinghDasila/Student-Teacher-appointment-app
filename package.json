@@ -8,5 +8,11 @@
   },
   "author": "Aditya Singh",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "pg": "^8.13.0"
+  }
 }
