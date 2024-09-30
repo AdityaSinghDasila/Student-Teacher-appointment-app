@@ -52,6 +52,7 @@ app.post("/login_student",async (req,res)=>{
         }
     }catch(error){
         console.log(error);
+        res.render("home_bst.ejs",{});
     }    
 });
     //teacher login handler
@@ -102,6 +103,29 @@ app.post("/login_admin",async (req,res)=>{
         console.log(error);
     }    
 });
+
+app.post("/registerS",async(req,res)=>{
+    try{
+        var que ="INSERT INTO student(name,password) VALUES($1,$2);";
+        var result = await db.query(que,[req.body.Student_name,req.body.password]);
+        if(result){
+            console.log("registered student successfully");
+            res.render("home_bst.ejs",{});
+        }else{
+            console.log("Something went wrong");
+        }
+    }catch(error){
+        console.log(error.message);
+    }
+})
+
+app.get("/go_toRegister",(req,res)=>{
+    try{
+        res.render("student_register.ejs",{});
+    }catch(error){
+        console.log(error.message);
+    }
+})
 
 
 
@@ -376,8 +400,6 @@ app.post("/admin_removeT",async (req,res)=>{
         console.log(error.message);
     }
 })
-
-
 
 
 

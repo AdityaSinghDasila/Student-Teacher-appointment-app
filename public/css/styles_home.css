@@ -54,3 +54,10 @@ th{
 td{
     padding:8px;
 }
+a{
+    text-decoration: none;
+    color:white;
+}
+#regB{
+    margin-top: 4px;
+}

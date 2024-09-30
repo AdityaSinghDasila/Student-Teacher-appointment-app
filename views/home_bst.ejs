@@ -14,9 +14,9 @@
         <p>Our platform makes it easy for students to book appointments with their teachers online. Whether you need academic guidance, one-on-one meetings, or any consultation, you can schedule your time with just a few clicks. Teachers can manage their appointments effortlessly, approve or cancel bookings, and stay organized with a personalized dashboard. Admins can ensure smooth operations by managing teacher and student registrations. Enjoy a hassle-free and efficient booking experience! </p>
         <p>Please Enter Your Credentials To Enter The Portal</p>
      </header>
-     <div class="page">
+     <div class="page" id="page">
 
-        <div class="student_outer all_three_outer">
+        <div class="student_outer all_three_outer" id="page">
             <div id="student_box">
                 <p>Student</p>
                 <form action="/login_student" method="post">
@@ -35,6 +35,8 @@
                     <br>
                     <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
                   </form>
+                  <br>
+                    <button id="regB" class="btn btn-secondary w-100 py-2"><a href="/go_toRegister">Register</a></button>                  
             </div>
         </div>
 
@@ -85,6 +87,5 @@
         <h3 style="color: red;"><%=message%></h3>
       <%}%>
      </div>
-     
 </body>
 </html>
