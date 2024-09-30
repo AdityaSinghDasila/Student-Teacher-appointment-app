@@ -402,8 +402,25 @@ app.post("/admin_removeT",async (req,res)=>{
 })
 
 
-
-
+//too
+app.post("/search_teacher_admin",async (req,res)=>{
+    try{
+        var quer = "SELECT id,name,subject FROM teacher WHERE name ILIKE '%'||$1||'%'";
+        const result = await db.query(quer,[req.body.Teacher_name]);
+        if(result){
+            if(result.rows.length != 0){
+                res.render("admin_portal_add.ejs",{name : userName, datas : result.rows});
+                // console.log(result.rows);
+            }else{
+                res.render("student_portal_book.ejs",{message : "no teacher found"});
+            }
+        }else{
+            console.log("database problem!");
+        }
+    }catch(error){
+        console.log(error.message);
+    }
+});
 
 
 
