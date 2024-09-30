@@ -16,12 +16,30 @@
      
      
      <div class="outer_search">
-        <div>
-             <form action="/" method="post" class ="search_bar">
+        <div class="reee">
+            <form action="/search_teacher" method="post" class ="search_bar">
                 <label for="Tname">Teacher Search :</label>
                 <input type="text" id="Tname" placeholder="Teacher Name" name="Teacher_name">
                 <input type="submit" value="search">
             </form>
+            <%if(locals.message){%>
+                <p>no teachers found</p>
+            <%}else if(locals.datas){%>
+                    <table>
+                        <tr>
+                           <th>ID</th> 
+                           <th>name</th> 
+                           <th>subject</th> 
+                        </tr>
+                        <%for(var i=0;i<datas.length;i++){%>
+                        <tr>
+                            <td><%=datas[i].id%></td>
+                            <td><%=datas[i].name%></td>
+                            <td><%=datas[i].subject%></td>
+                        </tr>
+                        <%}%>
+                    </table>
+                <%}%>
         </div>
      </div>
 
@@ -29,21 +47,21 @@
         <div class="book_outer">
                 <div class ="navigation_bar">
                     <div class="buttn">
-                        <a href="./admin_portal_add.html">Add</a>
+                        <a href="/back_toAdd">Add</a>
                     </div>
                     <div class="buttn">
-                        <a href="./admin_portal_remove.html">Remove</a>
+                        <a href="/removeT">Remove</a>
                     </div>
                     <div class="buttn">
-                        <a href="./home_bst.html">Logout</a>
+                        <a href="/logoutA">Logout</a>
                     </div>
                 </div>
             <div class="book">
-                <form action="/" class="booking_form">
+                <form action="/admin_addT" method="post" class="booking_form">
                     <div>
                         <label for="Sname">Name </label>
                         <br>
-                        <input type="text" id="Teacher_name" name="Student_name" placeholder="name">
+                        <input type="text" id="Teacher_name" name="Teacher_name" placeholder="name">
                     </div>
                     <div>
                         <label for="Teacher_subject">Subject </label>
@@ -60,8 +78,12 @@
                         <input type="reset">
                     </div>
                 </form>
+                <%if(locals.message){%>
+                    <div>
+                        <p style="color:green">Teacher was added to the database</p>
+                    </div>
+                    <%}%>
             </div>
-    
     </div>
 </body>
 </html>

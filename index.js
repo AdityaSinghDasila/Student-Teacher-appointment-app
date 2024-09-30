@@ -29,6 +29,8 @@ var Sid =-1;
 var userNameT="";
 var Tid=-1;
 
+var adminId =-1;
+
 //app starts and sends login page "home_bst"
 app.get("/",(req,res)=>{
     res.render("home_bst.ejs",{});
@@ -78,11 +80,27 @@ app.post("/login_teacher",async (req,res)=>{
         console.log(error.message);
     }
 });
+
+
+
+
     //admin login handler
-app.post("/login_admin",(req,res)=>{
-    console.log("Form data found! " + req.body.admin_id);
-    //after authentication
-    res.sendFile(__dirname + "/public/admin_portal_add.html");
+app.post("/login_admin",async (req,res)=>{
+    try{
+        var query = "select * from admin WHERE id = $1 AND password= $2";
+        var row = await db.query(query,[req.body.admin_id,req.body.password]);
+        //after authentication
+        if(row.rows.length != 0){
+            res.render("admin_portal_add.ejs",{});
+            console.log("sign in successfull,Admin");
+            adminId = req.body.admin_id;
+        }else{
+            console.log("password does not match");
+            res.render("home_bst.ejs",{message : "Password Incorrect"});
+        }
+    }catch(error){
+        console.log(error);
+    }    
 });
 
 
@@ -212,7 +230,6 @@ app.get("/logoutT",(req,res)=>{
 });//with this, login functionality has been finished
 
 
-
 app.get("/Tpending",async (req,res)=>{
     try{
         var que="SELECT * FROM appointments WHERE teacher_id=$1 AND status='pending'";
@@ -299,10 +316,66 @@ app.post("/cancel",async (req,res)=>{
 /*------------------------------------------------------------------------------*/
 //ADMIN portal 
 
+app.get("/back_toAdd",async (req,res)=>{
+    try{
+        res.render("admin_portal_add.ejs",{});
+    }catch(error){
+        console.log(error);
+    }
+});
+
+app.get("/removeT",(req,res)=>{
+    try{
+        res.render("admin_portal_remove.ejs",{});
+    }catch(error){
+        console.log(error.message);
+    }
+});
+
+app.get("/logoutA",(req,res)=>{
+    try{
+        adminId=-1;
+        res.render("home_bst.ejs",{});
+    }catch(error){
+        console.log(error.message);
+    }
+})
 
 
+app.post("/admin_addT",async (req,res)=>{
+    try{
+        var que = "INSERT INTO teacher(name,subject,password) VALUES($1,$2,$3)";
+        var Result = await db.query(que,[req.body.Teacher_name,req.body.Teacher_subject,req.body.Teacher_password]);
+        if(Result){
+            console.log("Teacher added!");
+            res.render("admin_portal_add.ejs",{message:"yes"});
+        }else{
+            console.log("what happended?!");
+        }
+    }catch(error){
+        console.log(error.message);
+    }
+});
 
-
+app.post("/admin_removeT",async (req,res)=>{
+    try{
+        var ApDel ="DELETE FROM appointments WHERE teacher_id =$1;";
+        var aResult = await db.query(ApDel,[req.body.Teacher_id]);
+        if(aResult){
+            var que = "DELETE FROM teacher WHERE id=$1";
+            var result = await db.query(que,[req.body.Teacher_id]);
+            if(result){
+                res.render("admin_portal_remove.ejs",{message:"yes"});
+            }else{
+                console.log("whaaa?");
+            }
+        }else{
+            console.log("eee");
+        }
+    }catch(error){
+        console.log(error.message);
+    }
+})
 
 
 
