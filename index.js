@@ -412,7 +412,7 @@ app.post("/search_teacher_admin",async (req,res)=>{
                 res.render("admin_portal_add.ejs",{name : userName, datas : result.rows});
                 // console.log(result.rows);
             }else{
-                res.render("student_portal_book.ejs",{message : "no teacher found"});
+                res.render("admin_portal_add.ejs",{message : "no teacher found"});
             }
         }else{
             console.log("database problem!");
